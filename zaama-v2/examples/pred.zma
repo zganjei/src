@@ -1,0 +1,21 @@
+vars: s pcError
+	 pc00_thread pc10_thread pc20_thread
+	 pc00_main pc01_main pc04_main pc05_main pc02_main pc03_main pc06_main pc07_main pc10_main pc11_main pc14_main pc15_main pc12_main pc13_main pc16_main pc17_main pc20_main pc21_main pc24_main pc25_main pc22_main pc23_main pc26_main pc27_main pc30_main pc31_main pc34_main pc35_main pc32_main pc33_main pc36_main pc37_main
+
+aux: 
+
+top: (= 1 (+ pc00_main pc01_main pc04_main pc05_main pc02_main pc03_main pc06_main pc07_main pc10_main pc11_main pc14_main pc15_main pc12_main pc13_main pc16_main pc17_main pc20_main pc21_main pc24_main pc25_main pc22_main pc23_main pc26_main pc27_main pc30_main pc31_main pc34_main pc35_main pc32_main pc33_main pc36_main pc37_main)) 
+
+commands:
+
+pred (>= pcError 1)
+
+with 
+
+ r185: (and (= s 3)
+	 (= s' 3)
+	 (= pc23_main' (- pc23_main 1)) (<= 1 pc23_main)
+	 (= pc33_main' (+ pc33_main 1)) (<= 0 pc33_main)
+	)
+
+

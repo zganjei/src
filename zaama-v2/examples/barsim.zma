@@ -1,0 +1,75 @@
+shared size, waiting
+//////////
+local i
+main0 -> main0: assume(i<size), spawn(thread0), i++
+main0 -> main1: assume i=size, i:=0
+
+main1 -> main1: assume i<size, join thread2, i++
+main1 -> main2: assume i=size
+
+main2 -> mainErr: join thread?
+///////////////
+thread0 -> thread1: waiting++
+thread1 -> thread2: waiting=size
+///////////////
+
+
+shared: p_waiting=size := *, p_waiting=0:= true, p:=size>=0
+
+////////
+mixed: p_i<size, p_i=size 
+local: p_i=0:=true, 
+main0 -> main0: p_i<size, spawn thread0, p_i<size:=*, p_i=0:=F, p(i=size):=*, p(i=size)
+main0 -> main1: p_i=size, p_i=0
+
+////////////
+thread0 -> thread1: p_waitin=size :=*
+thread1 -> thread2: p_waintin=size
+/////////
+
+vars : think sread count swrite lock
+
+
+commands:
+
+check_reachability:
+
+initial: (and (= 1 main0) (= sread 0) (= count 0) (= swrite 0) (= lock 1))
+
+bad: (and (<= 1 swrite) (<= 1 sread))
+
+# constrained preceq: (and (<= think think') (<= sread sread') (<= count count')(<= swrite swrite') (= lock lock')) : (= sread count) 
+
+ preceq: (and (<= think think') (<= sread sread') (<= count count')(<= swrite swrite') (= lock lock'))
+
+
+rules:
+
+
+
+read1: (and (>= think 1) (>= sread 0) (= count 0) (>= swrite 0) (= lock 1)
+	 (= think' (- think 1)) (= sread' (+ sread 1)) (= count' 1) 
+	 (= swrite' swrite) (= lock' 0)) 
+
+read2: ( and (>= think 1) (>= sread 0) (>= count 1) (>= swrite 0)
+	 (= think' (- think 1)) (= sread' (+ sread 1)) (= count' (+ count 1))
+	 (= swrite' swrite) (= lock' lock) )
+
+think1: (and (>= think 0) (>= sread 1) (>= count 2) (>= swrite 0)
+  	  (= think' (+ think 1)) (= sread' (- sread 1)) (= count' (- count 1))
+	  (= swrite' swrite) (= lock' lock))
+
+think2: (and (>= think 0) (>= sread 1) (= count 1) (>= swrite 0)
+  	  (= think' (+ think 1)) (= sread' (- sread 1)) (= count' 0)
+	  (= swrite' swrite) (= lock' 1))
+
+write: (and (>= think 1) (>= sread 0) (>= count 0) (>= swrite 0) (= lock 1)
+	 (= think' (- think 1)) (= sread' sread) (= count' count)
+	 (= swrite' 1) (= lock' 0))
+
+think3: (and (>= think 0) (>= sread 0) (>= count 0) (>= swrite 1) 
+  	  (= think' (+ think 1)) (= sread' sread) (= count' count)
+	  (= swrite' (- swrite 1)) (= lock' 1))
+
+
+
