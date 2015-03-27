@@ -24,8 +24,16 @@ extern int line_no;
 
 ID   [A-Za-z_][A-Za-z_0-9]*
 INT  [0-9]+
+%x c_comment
 %%
 
+"//".*\n     /*Skip- comment :) */
+
+"/*"			    { BEGIN(c_comment); };
+
+<c_comment>"/*" 		    { fprintf(stderr, "Warning: Nested comments\n"); };
+<c_comment>"*/"		    	    { BEGIN(INITIAL); } ;
+<c_comment>. 			    /*Skip- comment :) */
 
 {INT}		{ yylval.n = atoi(yytext); 
 #ifdef print_read_debug
