@@ -65,9 +65,9 @@ This brings up a list of the different types of Java. Simply select the Open JDK
 
 COMPILING:
 
-1. cd to directory containing src-patch1/
+1. cd to directory containing /src
 2. mkdir build; cd build
-3. cmake ../src-patch1
+3. cmake ../src
 4. make
 5. now you can see the directory build/zaama-v2, cd zaama-v2/
 6. to run a test in zaama: ./zaama example-input.txt
