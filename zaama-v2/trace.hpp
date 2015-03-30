@@ -48,7 +48,7 @@ class childRuleParent
   friend std::ostream& operator<< (std::ostream& out, 
 				   const childRuleParent& crp);
 
-  friend class Edges;
+  friend class Trace;
 
  private:
   Ideal::sptr child, parent;
@@ -56,11 +56,11 @@ class childRuleParent
 };
 
 
-class Edges : public std::map<unsigned, childRuleParent>
+class Trace : public std::map<unsigned, childRuleParent>
 {
  public:
 
-  Edges(){}
+	Trace(){}
 
   bool add(const Ideal::sptr& child, 
 	   const Rule::sptr& rule, 
