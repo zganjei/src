@@ -44,22 +44,21 @@ link_directories(/opt/ibm/ILOG/CPLEX_Studio126/opl/lib/x86-64_linux/static_pic/)
 #####################################
 
 # enable c++11
-#zeinab: I added "-DIL_STD" for CPLEX to compile
+#added "-DIL_STD" for CPLEX to compile
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DIL_STD -g -ggdb -std=c++11")
 
-#
-#inja bayad hame library ha ro ezafe konim ta link beshan! :)
-add_executable(zaama_new zaama.cpp bw_constraint.cpp linear_expression.cpp ${FLEX_MyScanner_OUTPUTS} ${BISON_MyParser_OUTPUTS} )
+#add all libraries to be linked
+add_executable(zaama zaama.cpp bw_constraint.cpp linear_expression.cpp ${FLEX_MyScanner_OUTPUTS} ${BISON_MyParser_OUTPUTS} )
 
-target_link_libraries(zaama_new ${Z3_LIBRARIES})
-target_link_libraries(zaama_new mathsat)
+target_link_libraries(zaama ${Z3_LIBRARIES})
+target_link_libraries(zaama mathsat)
 #for cplex
-target_link_libraries(zaama_new ilocplex)
-target_link_libraries(zaama_new cplex)
-target_link_libraries(zaama_new concert)
-target_link_libraries(zaama_new m)
-target_link_libraries(zaama_new pthread)
+target_link_libraries(zaama ilocplex)
+target_link_libraries(zaama cplex)
+target_link_libraries(zaama concert)
+target_link_libraries(zaama m)
+target_link_libraries(zaama pthread)
 
 
-target_link_libraries(zaama_new ${GMP_LIBRARIES})
+target_link_libraries(zaama ${GMP_LIBRARIES})
 
