@@ -2,7 +2,11 @@
 find_package(Boost REQUIRED)
 include_directories(${Boost_INCLUDE_DIR})
 
-find_package(GMP REQUIRED)
+#I set GMP paths manually XX
+#find_package(GMP REQUIRED)
+set(GMP_INCLUDE_DIR "/usr/include")
+set(GMP_LIBRARIES "/usr/lib/x86_64-linux-gnu/libgmp.so")
+set(GMPXX_LIBRARIES "/usr/lib/x86_64-linux-gnu/libgmpxx.so") 
 include_directories(${GMP_INCLUDE_DIR})
 
 find_package(BISON REQUIRED)
