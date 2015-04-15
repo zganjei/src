@@ -11,12 +11,8 @@ find_package(FLEX REQUIRED)
 find_path(Z3_INCLUDES NAMES z3++.h )
 find_library(Z3_LIBRARIES NAMES z3)
 
-message (${Z3_INCLUDES})
-message (${Z3_LIBRARIES})
-
 include_directories(${MATHSAT_INCLUDE_DIR})
 link_directories(${MATHSAT_LIB_DIR})
-
 
 include_directories(${Z3_INCLUDES})
 
@@ -34,13 +30,14 @@ ADD_FLEX_BISON_DEPENDENCY(MyScanner MyParser)
 
 #paths for CPLEX:
 
-set(CPLEX_INSTALLATION "/opt/ibm/ILOG/CPLEX_Studio126/")
-include_directories(${CPLEX_INSTALLATION}/cplex/include/)
-include_directories(${CPLEX_INSTALLATION}/concert/include/)
+set(CPLEX_ROOT_DIR "/opt/ibm/ILOG/CPLEX_Studio126/")
+include_directories(${CPLEX_ROOT_DIR}/cplex/include/)
+include_directories(${CPLEX_ROOT_DIR}/concert/include/)
 
-link_directories(/opt/ibm/ILOG/CPLEX_Studio126/cplex/lib/x86-64_linux/static_pic/)
-link_directories(/opt/ibm/ILOG/CPLEX_Studio126/concert/lib/x86-64_linux/static_pic/)
-link_directories(/opt/ibm/ILOG/CPLEX_Studio126/opl/lib/x86-64_linux/static_pic/)
+link_directories(${CPLEX_ROOT_DIR}/cplex/lib/x86-64_linux/static_pic/)
+link_directories(${CPLEX_ROOT_DIR}/concert/lib/x86-64_linux/static_pic/)
+link_directories(${CPLEX_ROOT_DIR}/opl/lib/x86-64_linux/static_pic/)
+
 #####################################
 
 # enable c++11
