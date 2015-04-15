@@ -1,8 +1,0 @@
-
-only finite shared variables are kept in the box part
-
-extrapolates job is to guess a frontier.
-
-A frontier is a list of <box,poly>. empty in the beginning.
-
-
