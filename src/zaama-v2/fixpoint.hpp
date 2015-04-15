@@ -55,7 +55,7 @@
 
 
 #define time_measuring_mode
-
+/////
 
 Point refinement_point;
 typedef unsigned long long timestamp_t;
