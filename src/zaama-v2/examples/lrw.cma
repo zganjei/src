@@ -1,0 +1,79 @@
+
+#Readers/Writers with priority to READERS See e.g.
+#http://www.juniata.edu/faculty/rhodes/os/ch5d.htm
+
+#lrw.hy
+
+#abstract readers/writers with priority to readers
+
+#MODEL [shared lock: mutex, count: int]
+
+#read1: think | lock --> sread : count=0,count'=1
+
+#read2: think --> sread : count>=1,count'=count+1
+
+#think1: sread --> think : count>=2,count'=count-1
+
+#think2: sread --> think | lock : count=1,count'=0
+
+#write: think | lock --> swrite
+
+#think3: swrite --> think | lock
+
+#Deletion partitions:  count # sread), # in {=,<,>}
+
+#Hytech verifies both RW & WW
+
+
+unordered 
+
+local:
+{think, sread, count, swrite, lock}
+
+
+commands
+
+
+print 
+
+check_reachability
+
+initial [:0<=think, sread=0, count=0, swrite=0, lock=1]
+
+bad [:1<=swrite, 1<=sread]
+
+preceq [:think<=think', sread<=sread',count<=count', 
+       swrite<=swrite', lock=lock']: #[:sread=count]
+
+extrapolate with 
+h76_polyhedra
+#h76_bd_shapes
+
+rules
+
+[ read1: :think>=1, sread>=0, count=0, swrite>=0, lock=1,
+	 think'=think-1, sread'=sread+1, count'=1, 
+	 swrite'=swrite, lock'=0]
+
+[ read2: :think>=1, sread>=0, count>=1, swrite>=0, 
+	 think'=think-1, sread'=sread+1, count'=count+1, 
+	 swrite'=swrite, lock'=lock]
+
+[ think1: :think>=0, sread>=1, count>=2, swrite>=0,
+  	  think'=think+1, sread'=sread-1, count'=count-1,
+	  swrite'=swrite, lock'=lock]
+
+[ think2: :think>=0, sread>=1, count=1, swrite>=0,
+  	  think'=think+1, sread'=sread-1, count'=0,
+	  swrite'=swrite, lock'=1]
+
+[ write: :think>=1, sread>=0, count>=0, swrite>=0, lock=1,
+	 think'=think-1, sread'=sread, count'=count, 
+	 swrite'=1, lock'=0]
+
+[ think3: :think>=0, sread>=0, count>=0, swrite>=1, 
+  	  think'=think+1, sread'=sread, count'=count,
+	  swrite'=swrite-1, lock'=1]
+
+exit
+

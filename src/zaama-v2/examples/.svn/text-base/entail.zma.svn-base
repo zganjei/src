@@ -1,0 +1,11 @@
+
+vars : think sread count swrite lock
+
+
+commands
+
+(and (= 0 think) (= sread 0) (= count 0) (= swrite 0) (= lock 1))
+
+==>
+
+(and (= 0 swrite) (= 0 sread))

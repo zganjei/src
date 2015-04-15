@@ -1,0 +1,12 @@
+
+vars : x y z 
+
+
+commands:
+
+up (and (= y x) (> y z) (>= z 1) (>= x 0) (>= y 0))
+
+with 
+
+preceq: (and (<= x x') (<= y y') (<= z z')) 
+

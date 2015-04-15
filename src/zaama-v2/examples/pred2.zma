@@ -1,0 +1,13 @@
+
+vars : x y z
+
+
+commands:
+
+post (and (= x y) (= y z))
+
+with 
+
+read1: (and (= x' (+ x 1) )  (= y' (+ y 1))) 
+
+

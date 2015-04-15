@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/projects/avmonths/!svn/ver/693/src/zaama-v2/conf
+END
+authz
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/projects/avmonths/!svn/ver/693/src/zaama-v2/conf/authz
+END
+svnserve.conf
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/projects/avmonths/!svn/ver/693/src/zaama-v2/conf/svnserve.conf
+END
+passwd
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/projects/avmonths/!svn/ver/693/src/zaama-v2/conf/passwd
+END

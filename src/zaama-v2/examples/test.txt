@@ -1,0 +1,80 @@
+vars: s pcError
+	 pc00_thread pc10_thread pc20_thread pc30_thread pc40_thread
+	 pc00_main pc10_main
+aux: 
+
+top: (and (>= s 0) (>= 0 s)
+	 (>= pc00_thread 0)
+	 (>= pc10_thread 0)
+	 (>= pc20_thread 0)
+	 (>= pc30_thread 0)
+	 (>= pc40_thread 0)
+	 (or (and (= pc00_main 1) (= pc10_main 0))
+	 	 (and (= pc00_main 0) (= pc10_main 1)))
+	 ) 
+
+commands:
+
+check_reachability:
+
+initial: (and (= s 0)
+	 (= pcError 0) 
+	 (= pc00_main 1)
+	 (= pc00_thread 0)
+	 (= pc10_thread 0)
+	 (= pc20_thread 0)
+	 (= pc30_thread 0)
+	 (= pc40_thread 0)
+	 (= pc10_main 0)
+	)
+
+bad: (>= pcError 1) 
+
+constrained preceq: (and (<= pcError pcError')
+	 (<= pc00_thread pc00_thread')
+	 (<= pc10_thread pc10_thread')
+	 (<= pc20_thread pc20_thread')
+	 (<= pc30_thread pc30_thread')
+	 (<= pc40_thread pc40_thread')
+	) : (>= pcError 1)
+
+rules: 
+
+ 0: (and 
+	
+	 (= pc00_thread' (- pc00_thread 1)) (<= 1 pc00_thread)
+	 (= pc10_thread' (+ pc10_thread 1)) (<= 0 pc10_thread)
+	)
+ 1: (and 
+	
+	 (= pc10_thread' (- pc10_thread 1)) (<= 1 pc10_thread)
+	 (= pc20_thread' (+ pc20_thread 1)) (<= 0 pc20_thread)
+	)
+ 2: (and 
+	
+	 (= pc20_thread' (- pc20_thread 1)) (<= 1 pc20_thread)
+	 (= pc30_thread' (+ pc30_thread 1)) (<= 0 pc30_thread)
+	)
+ 3: (and 
+	(= pc00_thread 0 )
+	(= pc10_thread 0 )
+	(= pc20_thread 0 )
+	
+	 (= pc30_thread' (- pc30_thread 1)) (<= 1 pc30_thread)
+	 (= pc40_thread' (+ pc40_thread 1)) (<= 0 pc40_thread)
+	)
+ 4: (and 
+	
+	 (= pc40_thread' (- pc40_thread 1)) (<= 1 pc40_thread)
+	 (= pcError' (+ pcError 1)) (<= 0 pcError)
+	)
+ 5: (and 
+	
+	 (= pc00_main' (+ pc00_main 0)) (<= 1 pc00_main)
+	 (= pc00_thread' (+ pc00_thread 1)) (<= 0 pc00_thread)
+	)
+ 6: (and 
+	
+	 (= pc00_main' (- pc00_main 1)) (<= 1 pc00_main)
+	 (= pc10_main' (+ pc10_main 1)) (<= 0 pc10_main)
+	)
