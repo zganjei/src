@@ -26,6 +26,7 @@
 #include <stdio.h>
 #include <set>
 #include <string.h>
+#include <sys/time.h>
 
 //############# not needed after parsing
 //#include "linear_expression.hpp"
@@ -40,7 +41,14 @@ extern int yyparse();
 extern FILE *yyin;
 extern int yy_scan_string(const char *);
 
-
+typedef unsigned long long timestamp_t;
+static timestamp_t
+get_timestamp ()
+{
+	struct timeval now;
+	gettimeofday (&now, NULL);
+	return  now.tv_usec + (timestamp_t)now.tv_sec * 1000000;
+}
 
 int main(int argc, char** argv)
 {
@@ -61,10 +69,14 @@ int main(int argc, char** argv)
 	}
 	yyin = fopen(argv[1], "r");
 	if(yyin!=NULL){
+		timestamp_t t1 = get_timestamp();
 		yyparse();
+		timestamp_t t2 = get_timestamp();
+
+		std::cout<<"Execution time: "<<(t2-t1)/1000000.0L<<" (s)\n\n";
 	}
 	else
-		std::cerr << "could not open file: " << argv[1] << "\n";
+		std::cerr << "could not open file: " << argv[1] << "\n\n";
 	return 0;
 }
 

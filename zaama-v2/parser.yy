@@ -304,7 +304,7 @@ Preorder::sptr preceq = g_preorder;
 
  Fixpoint fixpoint(inits, rules, bads, preceq);
   tribool result=fixpoint.isReachable(sequence);
-  std::cout << (result? "reachable" : "not reachable") << "\n";
+  std::cout << (result? "reachable" : "Not Reachable :)") << "\n\n";
   assert(sequence);
   if(!sequence->isEmpty())
     std::cout << "sequence " << sequence << "\n";     

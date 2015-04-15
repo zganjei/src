@@ -43,8 +43,8 @@
 class Utility{
 public:
 	static Ideal::MSet close(BW_Constraint::sptr bwc,Refine_Info::MSet refine_objs){//from bw_
-		std::cout<<"Utility::close()\n";
 #ifdef debug_close
+		std::cout<<"Utility::close()\n";
 		std::cout<<"input bwc: "<<bwc<<std::endl;
 #endif
 		Ideal::MSet result;
@@ -281,7 +281,7 @@ static FW_Constraint::MSet intersect(const BW_Constraint::sptr& bwc,const Ideal:
 			return result;//empty
 
 		std::vector<Linear_Expression> this_lexprs=ideal->get_all_expressions();
-		std::cout<<"ideal lexpr ready\n";
+//		std::cout<<"ideal lexpr ready\n";
 		std::vector<Linear_Expression>other_lexprs=bwc->get_all_expressions();
 
 #ifdef debug_intersect

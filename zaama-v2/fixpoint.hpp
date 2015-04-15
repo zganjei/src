@@ -154,7 +154,7 @@ public:
 #endif
 
 				if(old_set.empty()){
-					std::cout << "\nold_set is empty! can't go any further" << std::endl;
+//					std::cout << "\nold_set is empty! can't go any further!\n" << std::endl;
 					if(sequence)
 						sequence->clear();
 					return false;
@@ -467,7 +467,7 @@ private:
 			Ideal::MSet& set_B,
 			Ideal::sptr& witness_in_B)
 	{
-		std::cout<<"find_intersection_witnesses() "<<std::endl;
+//		std::cout<<"find_intersection_witnesses() "<<std::endl;
 		bool found = false;
 		FW_Constraint::MSet_it a_it = set_A.get_iterator();
 		FW_Constraint::const_iterator a = a_it.get_current_it();

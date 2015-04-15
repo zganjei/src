@@ -320,6 +320,10 @@ public:
 
 				result.push_back(point);
 
+				cplex.setOut(env.getNullStream());
+				cplex.setWarning(env.getNullStream());
+				cplex.setError(env.getNullStream());
+
 			}
 
 		}
